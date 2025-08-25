@@ -1,0 +1,36 @@
+{
+"manifest_version": 3,
+"name": "Valerie – Gmail OTP Autofill",
+"version": "0.1.0",
+"description": "Fetches the latest OTP/MFA code from your Gmail and (on click) pastes it into the active site.",
+"permissions": [
+"identity",
+"scripting",
+"activeTab",
+"storage"
+],
+"host_permissions": [
+"https://gmail.googleapis.com/*"
+],
+"action": {
+"default_title": "Get OTP",
+"default_popup": "popup.html"
+},
+"background": {
+"service_worker": "background.js",
+"type": "module"
+},
+"content_scripts": [
+{
+"matches": ["<all_urls>"],
+"js": ["content.js"],
+"run_at": "document_idle"
+}
+],
+"oauth2": {
+"client_id": "YOUR_CLIENT_ID.apps.googleusercontent.com",
+"scopes": [
+"https://www.googleapis.com/auth/gmail.readonly"
+]
+}
+}
